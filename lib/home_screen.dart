@@ -18,10 +18,11 @@ class MyHomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     /// WidgetRef allows us to communicate from widgets to other providers
-    final user = ref.watch(userProvider);
+    final user = ref.watch(userProvider.select((value) => value.age)); /// Widget tree will rerun when age property changes
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(user.name),
+        title: Text(user.toString()),
       ),
       body: Column(
         children: [
@@ -32,7 +33,7 @@ class MyHomePage extends ConsumerWidget {
             onSubmitted: (value) => onSubmitAge(ref, value),
           ),
           Center(
-            child: Text(user.age.toString()),
+            child: Text(user.toString()),
           )
         ],
       ),
