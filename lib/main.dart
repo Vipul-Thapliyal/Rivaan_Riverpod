@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rivaan_riverpod/home_screen.dart';
 
-final nameProvider = Provider<String>((ref) => "Rivaan");
+final nameProvider = Provider<String>((ref) => "Rivaan @");
 
 void main() {
   runApp(

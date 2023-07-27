@@ -2,23 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rivaan_riverpod/main.dart';
 
-class MyHomePage extends ConsumerWidget {
+class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    /// WidgetRef allows us to communicate from widgets to other providers
-    final name = ref.watch(nameProvider);
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("RiverPod"),
       ),
-      body: Column(
-        children: [
-          Center(
-            child: Text(name),
-          )
-        ],
+      body: Consumer(
+        builder: (context, ref, child) {
+          final name = ref.watch(nameProvider);
+          return Column(
+            children: [
+              Center(
+                child: Text(name),
+              )
+            ],
+          );
+        }
       ),
     );
   }
