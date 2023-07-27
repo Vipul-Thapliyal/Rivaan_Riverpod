@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rivaan_riverpod/home_screen.dart';
+import 'package:rivaan_riverpod/user.dart';
 
-final nameProvider = StateProvider<String?>((ref) => null);
+final userProvider = StateNotifierProvider<UserNotifier, User>(
+  (ref) => UserNotifier()
+);
 
 void main() {
-  runApp(
-    const ProviderScope(
-      child: MyApp()
-    )
-  );
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
