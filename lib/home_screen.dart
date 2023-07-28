@@ -8,17 +8,35 @@ class MyHomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(""),
-      ),
-      body: Column(
-        children: const [
-          Center(
-            child: Text(""),
-          )
-        ],
-      ),
+    return ref.watch(fetchUserProvider).when(
+      data: (data) {
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text(""),
+          ),
+          body: Column(
+            children: [
+              Center(
+                child: Text(data.name),
+              )
+            ],
+          ),
+        );
+      },
+      error: (error, stackTrace) {
+        return Scaffold(
+          body: Center(
+            child: Text(error.toString()),
+          ),
+        );
+      },
+      loading: () {
+        return const Scaffold(
+          body : Center(
+            child: CircularProgressIndicator(),
+          ),
+        );
+      }
     );
   }
 }

@@ -5,7 +5,8 @@ import 'package:rivaan_riverpod/user.dart';
 import 'package:http/http.dart' as http;
 
 final fetchUserProvider = FutureProvider((ref) {
-  String url = "https://jsonplaceholder.typicode.com/users/1";
+  // String url = "https://jsonplaceholder.typicode.com/users/1";
+  String url = "https://jsonplaceholder.typicode.com/usesddfrs";
   return http.get(Uri.parse(url)).then((value) => User.fromJson(value.body));
 });
 
