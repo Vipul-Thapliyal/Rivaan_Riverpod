@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rivaan_riverpod/home_screen.dart';
 import 'package:rivaan_riverpod/user.dart';
+import 'package:http/http.dart' as http;
 
-// final userProvider = StateNotifierProvider<UserNotifier, User>(
-//   (ref) => UserNotifier()
-// );
-
-final userChangeNotifierProvider = ChangeNotifierProvider((ref) => UserNotifierChange());
+final fetchUserProvider = FutureProvider((ref) {
+  String url = "https://jsonplaceholder.typicode.com/users/1";
+  return http.get(Uri.parse(url)).then((value) => User.fromJson(value.body));
+});
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
