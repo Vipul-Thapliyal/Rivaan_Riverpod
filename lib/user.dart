@@ -57,21 +57,19 @@ class User {
   int get hashCode => name.hashCode ^ age.hashCode;
 }
 
-class UserNotifier extends StateNotifier<User>{ /// It will contain methods to update value of User Model
-  UserNotifier() : super(
-    const User(
-      name: "",
-      age: 0
-     )
+class UserNotifierChange extends ChangeNotifier {
+  User user = const User(
+    name: "",
+    age: 0
   );
-  /// Can't make change to state outside UserNotifer
 
   void updateName(String n) {
-    /// Copy all properties of state but only change name varaible to whatever is passed to n
-    state = state.copyWith(name: n);
+    user = user.copyWith(name: n);
+    notifyListeners();
   }
 
   void updateAge(int a) {
-    state = state.copyWith(age: a);
+    user = user.copyWith(age: a);
+    notifyListeners();
   }
 }

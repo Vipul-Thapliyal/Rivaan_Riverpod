@@ -1,28 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rivaan_riverpod/main.dart';
+import 'package:rivaan_riverpod/user.dart';
 
 class MyHomePage extends ConsumerWidget {
   const MyHomePage({super.key});
 
   void onSubmit(WidgetRef ref, String value) {
-    ref.read(userProvider.notifier).updateName(value);
+    ref.read(userChangeNotifierProvider).updateName(value);
   }
 
   void onSubmitAge(WidgetRef ref, String value) {
-    ref.read(userProvider.notifier).updateAge(int.parse(value));
+    ref.read(userChangeNotifierProvider).updateAge(int.parse(value));
   }
-
-
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    /// WidgetRef allows us to communicate from widgets to other providers
-    final user = ref.watch(userProvider.select((value) => value.age)); /// Widget tree will rerun when age property changes
+    ref.watch(userChangeNotifierProvider).user = const User(
+      name: "",
+      age: 0
+    );
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(user.toString()),
+        title: Text(user.name),
       ),
       body: Column(
         children: [
@@ -33,7 +34,7 @@ class MyHomePage extends ConsumerWidget {
             onSubmitted: (value) => onSubmitAge(ref, value),
           ),
           Center(
-            child: Text(user.toString()),
+            child: Text(user.age.toString()),
           )
         ],
       ),

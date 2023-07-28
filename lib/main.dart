@@ -3,9 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rivaan_riverpod/home_screen.dart';
 import 'package:rivaan_riverpod/user.dart';
 
-final userProvider = StateNotifierProvider<UserNotifier, User>(
-  (ref) => UserNotifier()
-);
+// final userProvider = StateNotifierProvider<UserNotifier, User>(
+//   (ref) => UserNotifier()
+// );
+
+final userChangeNotifierProvider = ChangeNotifierProvider((ref) => UserNotifierChange());
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
